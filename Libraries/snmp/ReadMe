@@ -1,0 +1,28 @@
+Java SNMP Package, copyright 2005, Jonathan Sevy, Drexel University <jsevy@cs.drexel.edu>
+Project home: http://gicl.cs.drexel.edu/people/sevy/snmp/snmp_package.html
+
+
+This distribution contains the source for the Java SNMP package, as well as build scripts
+for both GNU Make and Apache Ant. The following build targets are provided:
+
+SNMPInquisitor: builds the SNMP Inquisitor application, which allows the querying of
+SNMP-enabled hosts
+
+SNMPPackage: builds the SNMP package into the snmp.jar file
+
+SNMPDistribution: archives the source and build scripts into the snmp_source.zip file
+
+SNMPTrapTest: builds the SNMP Trap Test application, which receives trap messages from
+remote hosts and displays their contents
+
+SNMPAgentTest: builds the SNMP Agent Test application, which demonstrates the use of
+the package to construct an SNMP agent which listens for requests from an SNMP management
+entity
+
+
+To build any of these targets, use either
+  ant <target-name>
+if you have Apache Ant installed, or
+  make <target-name>
+if GNU make is available. Note that both build scripts assume that the javac and jar
+executables are available in the current path.

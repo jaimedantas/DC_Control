@@ -1,0 +1,63 @@
+
+Changes from version 1.4.1 to 1.4.2:
+
+- Removed font-key search from main apps to eliminate StringBuffer-to-String
+  exception on app startup
+
+
+Changes from version 1.4 to 1.4.1:
+
+- Added agentIPAddress parameter to processTrap/processInformRequest methods 
+  of SNMPv2TrapListener and SNMPv2InformRequestListener classes, so listeners 
+  can accept or reject traps based on IP address since this isn't part of the
+  v2 PDUs (thanks to Yong-Kiat Ng)
+
+- Added communityName parameter to processTrap methods of SNMPTrapListener
+  classes, so listeners can accept or reject traps based on community name
+  (thanks to Kim Le)
+
+- Added constructors permitting non-standard ports to be used for all exchanges
+
+
+Changes from version 1.3 to 1.4:
+
+- Replaced SNMPInteger values in Get and GetNext requests with SNMP Nulls
+
+- Changed SNMP TimeTicks in trap sender timestamp to 1/100ths of second rather 
+  than 1/1000ths
+  
+- Restricted SNMPTimeTicks to be 32-bit quantity (rather than arbitrarily large, 
+  which caused problems with some receivers)
+
+- Added PrintWriter for error reporting in AgentListener and TrapListener interfaces
+  so error reporting can be directed as desired (rather than always to System.out)
+  
+- Changed internal representation of SNMPObjectIdentifier to array of longs to accept
+  OID components up to 2^32 - 1 (thanks to Norman Elton)
+  
+- Changed toString() methods to utilize StringBuffer internally, for efficiency 
+  (thanks to Philip Yarra)
+  
+- Added radix specification to SNMPInteger class toString() method
+
+- Improved error handling:
+  - Messages and PDUs perform more detailed qualification of contents, reporting more 
+    specific errors (rather than passing on generic Java exception types)
+  - Agent Interface now catches and reports all exceptions
+
+- Fixed bug in SNMPv1AgentInterface, in which handled OIDs checked by reference 
+  rather than by value (thanks to Roman Levandovsky)
+
+- Added equals() and hashCode() methods to SNMP object subclasses for use in collections
+
+- Added support for SNMPv2 traps and inform request messages. Note that as a result the
+  1.4 version of the package is not directly backward-compatible with the 1.3 version,
+  as all classes related to trap messages have been qualified to indicate whether the
+  trap is a v1 or v2 trap. Thus applications which use traps will need to be changed
+  to use the 1.4 version package; however, the changes should be simple textual 
+  substitutions, e.g., changing all references to SNMPTrapPDU to SNMPv1TrapPDU.
+
+- Added build scripts for GNU Make and Apache Ant
+  
+  
+

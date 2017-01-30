@@ -1,0 +1,83 @@
+
+<project name="Java SNMP Package" default="SNMPInquisitor" basedir=".">
+    <description>
+        Ant build file for the Java SNMP Package
+    </description>
+  
+  <target name="SNMPPackage" description="Build the SNMP package">
+    <!-- Set the build directory -->
+    <property name="buildDir" value="build_package"/>
+    <!-- Create the build directory -->
+    <mkdir dir="${buildDir}"/>
+    <!-- Compile the java code from source into build -->
+    <javac srcdir="source" destdir="${buildDir}" includes="snmp/*.java"/>
+    <!-- Put everything in build into the ${mainClass}.jar file -->
+    <jar jarfile="snmp.jar" basedir="${buildDir}"/>
+    <!-- Delete the build directory tree -->
+    <delete dir="${buildDir}"/>
+  </target>
+
+  <target name="SNMPInquisitor" description="Build the SNMP Inquisitor application">
+    <!-- Set the main class to be SNMPInquisitor -->
+    <property name="mainClass" value="SNMPInquisitor"/>
+    <property name="buildDir" value="build_inquisitor"/>
+    <!-- Create the build directory -->
+    <mkdir dir="${buildDir}"/>
+    <!-- Compile the java code from source into build -->
+    <javac srcdir="source" destdir="${buildDir}" includes="${mainClass}.java"/>
+    <!-- Put everything in build into the ${mainClass}.jar file -->
+    <jar jarfile="${mainClass}.jar" basedir="${buildDir}" manifest="manifest/${mainClass}.mf"/>
+    <!-- Delete the build directory tree -->
+    <delete dir="${buildDir}"/>
+  </target>
+
+  <target name="SNMPAgentTest" description="Build the SNMP Agent Test application">
+    <!-- Set the main class to be SNMPAgentTest -->
+    <property name="mainClass" value="SNMPAgentTest"/>
+    <!-- Set the build directory -->
+    <property name="buildDir" value="build_agent_test"/>
+    <!-- Create the build directory -->
+    <mkdir dir="${buildDir}"/>
+    <!-- Compile the java code from source into build -->
+    <javac srcdir="source" destdir="${buildDir}" includes="${mainClass}.java"/>
+    <!-- Put everything in build into the ${mainClass}.jar file -->
+    <jar jarfile="${mainClass}.jar" basedir="${buildDir}" manifest="manifest/${mainClass}.mf"/>
+    <!-- Delete the build directory tree -->
+    <delete dir="${buildDir}"/>
+  </target>
+
+  <target name="SNMPTrapTest" description="Build the SNMP Trap Test application">
+    <!-- Set the main class to be SNMPTrapTest -->
+    <property name="mainClass" value="SNMPTrapTest"/>
+    <!-- Set the build directory -->
+    <property name="buildDir" value="build_trap_test"/>
+    <!-- Create the build directory -->
+    <mkdir dir="${buildDir}"/>
+    <!-- Compile the java code from source into build -->
+    <javac srcdir="source" destdir="${buildDir}" includes="${mainClass}.java"/>
+    <!-- Put everything in build into the ${mainClass}.jar file -->
+    <jar jarfile="${mainClass}.jar" basedir="${buildDir}" manifest="manifest/${mainClass}.mf"/>
+    <!-- Delete the build directory tree -->
+    <delete dir="${buildDir}"/>
+  </target>
+
+  <target name="SNMPDistribution" description="Build the SNMP source distribution">
+    <!-- Zip up the source, manifests, and build files -->
+    <zip destfile="snmp_source.zip">
+      <fileset dir="." includes="source/**"/>
+      <fileset dir="." includes="manifest/**"/>
+      <fileset dir="." includes="build.xml Makefile ReadMe ChangeLog"/>
+    </zip>
+  </target>
+
+  <target name="clean" description="Clean up any previously built binaries">
+    <!-- Clean up any jar files -->
+    <delete quiet="true" file="snmp.jar"/>
+    <delete quiet="true" file="SNMPInquisitor.jar"/>
+    <delete quiet="true" file="SNMPAgentTest.jar"/>
+    <delete quiet="true" file="SNMPTrapTest.jar"/>
+  </target>
+
+
+</project>
+   
