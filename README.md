@@ -14,6 +14,7 @@ The [SNMP Device](https://github.com/jaimedantas/Arduino-SNMP) is an embedded ha
 * Air conditioner actuation
 * Fault detection
 * Multplataform
+* Multithreading
 * Full integration with Zabbix and Nagios
 
 ##License
